@@ -1,1 +1,1 @@
-# Digital Cloet
+# Digital Closet
