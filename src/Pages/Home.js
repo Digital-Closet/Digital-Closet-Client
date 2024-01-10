@@ -1,5 +1,6 @@
 import React from 'react'
 import Jumbotron from '../Componants/Cards/Jumbotron'
+import {useAuth} from '../Context/Auth'
 
 const Home = () => {
   return (

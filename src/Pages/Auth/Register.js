@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Jumbotron from '../Componants/Cards/Jumbotron'
+import Jumbotron from '../../Componants/Cards/Jumbotron'
 import axios from "axios"
 import toast from "react-hot-toast"
 
@@ -9,18 +9,25 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+
+
     const handleSubmit = async (e) =>{
         e.preventDefault()
         try {
-            const res = await axios.post(`${process.env.REACT_APP_API}/register`, 
+            const {data} = await axios.post(`${process.env.REACT_APP_API}/register`, 
             {
                 name, 
                 email, 
                 password
             })
-            console.log(name, email, password)
+            console.log(data)
+            if (data?.error){
+            } else {
+                toast.success('Registration Successful')
+            }
         } catch(err){
             console.log(err)
+            toast.error('Registration Failed. Try Again')
         }
     }
   return (
