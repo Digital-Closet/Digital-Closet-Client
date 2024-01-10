@@ -6,6 +6,7 @@ const Home = () => {
   return (
     <div>
         <Jumbotron title='hello world' subtitle = 'welcome to e commerece'/>
+        
   
     </div>
   )
