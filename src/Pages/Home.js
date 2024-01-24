@@ -1,41 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Jumbotron from "../Componants/Cards/Jumbotron";
-import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import { RxDotFilled } from "react-icons/rx";
-import image1 from "../Assets/image1.jpg";
-import image2 from "../Assets/image2.jpg";
-import image3 from "../Assets/image3.jpg";
-import image4 from "../Assets/image4.jpg";
-import {useAuth} from '../Context/Auth'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import closet1 from "../Assets/closet 1.jpg";
+import closet2 from "../Assets/closet 2.jpg";
+import closet3 from "../Assets/closet 3.jpg";
+import closet4 from "../Assets/closet 4.jpg";
+import { useAuth } from "../Context/Auth";
 
 const Home = () => {
-  const images = [image1, image2, image3, image4];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextImage();
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [currentIndex]);
-
-  const prevImage = () => {
-    const isFirstImage = currentIndex === 0;
-    const newIndex = isFirstImage ? images.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
   };
 
-  const nextImage = () => {
-    const isLastImage = currentIndex === images.length - 1;
-    const newIndex = isLastImage ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
-
-  const goToImage = (imageIndex) => {
-    setCurrentIndex(imageIndex);
-  };
   return (
     <div>
       <Jumbotron
@@ -43,7 +27,7 @@ const Home = () => {
         subtitle="Your Eco-Friendly Closet Companion"
       />
       <div>
-        <p className="max-w-[1000px] m-auto text-center text-4xl font-bold py-4  ">
+        <p className="max-w-[1000px] m-auto text-center text-4xl font-bold py-4">
           Digital Closet was created with sustainability in mind. This app
           offers a unique platform where users can effortlessly organize their
           clothes for various occasions like work, travel, and special events.
@@ -51,32 +35,23 @@ const Home = () => {
           selling, and trading clothes, promoting sustainable fashion practices.
         </p>
       </div>
-      <div className="max-w-[1400px] h-[580px] w-full m-auto py-16 px-4 relative group">
-        <div
-          className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
-          style={{ backgroundImage: `url(${images[currentIndex]})` }}
-        ></div>
 
-        {/*left arrow*/}
-        <div className="absolute top-[50%] -translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 group-hover:bg-black/20 text-white cursor-pointer">
-          <BsChevronCompactLeft onClick={prevImage} size={30} />
-        </div>
-        {/*right arrow*/}
-        <div className="absolute top-[50%] -translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 group-hover:bg-black/20 text-white cursor-pointer">
-          <BsChevronCompactRight onClick={nextImage} size={30} />
-        </div>
-
-        <div className="flex top-4 justify-center py-2">
-          {images.map((image, imageIndex) => (
-            <div
-              className="text-2xl cursor-pointer"
-              key={imageIndex}
-              onClick={() => goToImage(imageIndex)}
-            >
-              <RxDotFilled />
-            </div>
-          ))}
-        </div>
+      {/* Carousel Container */}
+      <div className="flex justify-center items-center">
+        <Slider {...settings} className="w-full max-w-4xl">
+          <div className="flex justify-center">
+            <img src={closet1} alt="Clothing 1" className="object-contain" />
+          </div>
+          <div className="flex justify-center">
+            <img src={closet2} alt="Clothing 2" className="object-contain" />
+          </div>
+          <div className="flex justify-center">
+            <img src={closet3} alt="Clothing 3" className="object-contain" />
+          </div>
+          <div className="flex justify-center">
+            <img src={closet4} alt="Clothing 4" className="object-contain" />
+          </div>
+        </Slider>
       </div>
     </div>
   );
